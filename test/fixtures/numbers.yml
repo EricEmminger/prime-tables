@@ -5,5 +5,5 @@ one:
   prime: false
 
 two:
-  value: 1
-  prime: false
+  value: 2
+  prime: true
