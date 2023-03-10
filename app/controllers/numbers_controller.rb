@@ -59,8 +59,7 @@ class NumbersController < ApplicationController
 
   # GET /
   def root
-    @number = Number.new
-    @number.value = 3
+    @number = Number.new(value: 3)
     @rows = [
       # ['',2,3,5],
       # [2,4,6,10],
@@ -71,16 +70,7 @@ class NumbersController < ApplicationController
       @number = Number.new(number_params)
       if @number.valid?
         @number.generate_primes(@number.value)
-        sorted_primes = @number.primes.keys.sort
-        first_row = [''] + sorted_primes
-        @rows = [first_row]
-        sorted_primes.each do |prime|
-          row = [prime]
-          first_row[1..].each do |column|
-            row << column * prime
-          end
-          @rows << row
-        end
+        @rows = @number.generate_multiplication_table
       end
     end
   end

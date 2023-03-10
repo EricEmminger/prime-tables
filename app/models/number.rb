@@ -98,4 +98,18 @@ class Number < ApplicationRecord
     end
     @primes
   end
+
+  def generate_multiplication_table
+    sorted_primes = @primes.keys.sort
+    first_row = [''] + sorted_primes
+    rows = [first_row]
+    sorted_primes.each do |prime|
+      row = [prime]
+      first_row[1..].each do |column|
+        row << column * prime
+      end
+      rows << row
+    end
+    rows
+  end
 end
