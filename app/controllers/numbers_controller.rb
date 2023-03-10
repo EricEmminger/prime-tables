@@ -57,6 +57,34 @@ class NumbersController < ApplicationController
     end
   end
 
+  # GET /
+  def root
+    @number = Number.new
+    @number.value = 3
+    @rows = [
+      # ['',2,3,5],
+      # [2,4,6,10],
+      # [3,6,9,15],
+      # [5,10,15,25]
+    ]
+    if params[:number]
+      @number = Number.new(number_params)
+      if @number.valid?
+        @number.generate_primes(@number.value)
+        sorted_primes = @number.primes.keys.sort
+        first_row = [''] + sorted_primes
+        @rows = [first_row]
+        sorted_primes.each do |prime|
+          row = [prime]
+          first_row[1..].each do |column|
+            row << column * prime
+          end
+          @rows << row
+        end
+      end
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_number
