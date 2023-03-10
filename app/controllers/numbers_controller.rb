@@ -60,12 +60,7 @@ class NumbersController < ApplicationController
   # GET /
   def root
     @number = Number.new(value: 3)
-    @rows = [
-      # ['',2,3,5],
-      # [2,4,6,10],
-      # [3,6,9,15],
-      # [5,10,15,25]
-    ]
+    @rows = []
     if params[:number]
       @number = Number.new(number_params)
       if @number.valid?

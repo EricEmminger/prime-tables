@@ -58,7 +58,7 @@ class NumberTest < ActiveSupport::TestCase
 
   test 'user should input a whole number N where N is at least 1' do
     assert_nil @number.value, 'Expected value to be nil'
-    assert_not @number.save, 'Expected number without a value to not save'
+    refute @number.save, 'Expected number without a value to not save'
     fraction = 0.9
     @number.value = fraction
     assert @number.invalid?, 'Expected fractional value to be invalid'
@@ -71,7 +71,7 @@ class NumberTest < ActiveSupport::TestCase
     least = 1
     @number.value = least
     assert @number.valid?, 'Expected value at least 1 to be valid'
-    assert_not_nil @number.value, 'Expected value to be not nil'
+    refute_nil @number.value, 'Expected value to be not nil'
   end
 
   test 'application should output an N+1 x N+1 grid of numbers' do

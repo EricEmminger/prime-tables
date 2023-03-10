@@ -72,14 +72,6 @@ and outputs a multiplication table of <var>N</var> prime numbers.</p>
     multiplication table of <var>N</var> prime numbers when <var>N</var> is <kbd><%= params[:number][:value] %></kbd>
   </caption>
   <thead>
-    <% if false %>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">2</th>
-      <th scope="col">3</th>
-      <th scope="col">5</th>
-    </tr>
-    <% end %>
     <% row = @rows[0] %>
     <tr>
       <% row.each do |col| %>
@@ -88,26 +80,6 @@ and outputs a multiplication table of <var>N</var> prime numbers.</p>
     </tr>
   </thead>
   <tbody>
-    <% if false %>
-    <tr>
-      <th scope="row">2</th>
-      <td>4</td>
-      <td>6</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>6</td>
-      <td>9</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <th scope="row">5</th>
-      <td>10</td>
-      <td>15</td>
-      <td>25</td>
-    </tr>
-    <% end %>
     <% @rows[1..].each do |row| %>
     <tr>
       <th scope="row"><%= row[0] %></th>
