@@ -1,0 +1,145 @@
+<style>
+td, th {
+  color: white;
+  background-color: black;
+  border: thin dashed darkslategray;
+  border-collapse: collapse;
+  font-family: math;
+  padding: 0 5px;
+  text-align: end;
+}
+input[type=submit], th {
+  color: black;
+  background-color: lawngreen;
+}
+</style>
+
+<p style="color: green"><%= notice %></p>
+
+<header>
+  <h1>Prime Tables - Coding Exercise</h1>
+</header>
+
+<h2>Multiplication Table</h2>
+
+<p>This is an application that takes a numeric input <var>N</var> from a user
+and outputs a multiplication table of <var>N</var> prime numbers.</p>
+
+<h3>Input</h3>
+
+<%= form_with model: @number, url: root_path, method: :get do |form| %>
+  <p>The user should input a whole number <var>N</var>, where <var>N</var> is at least 1.</p>
+
+  <% if @number.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@number.errors.count, "error") %> prohibited this number from being processed:</h2>
+
+      <ul>
+        <% @number.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :value, 'How many prime numbers would you like to be the value of N?', style: "display: block" %>
+    <%= form.number_field :value, min: 1, step: 1 %>
+  </div>
+
+  <p>Depending on how large the value of <var>N</var> is, this could take a little while...</p>
+
+  <div>
+    <%= form.submit 'Create Multiplication Table...', style: "display: block" %>
+  </div>
+<% end %>
+
+<hr />
+
+<h3>Output</h3>
+
+<p>The application should output an <var>N</var>+1 x <var>N</var>+1 grid of numbers.</p>
+
+<h4>Table</h4>
+
+<output></output>
+
+<% if @rows.empty? %>
+<h5>Output will appear here.</h5>
+<% else %>
+<table>
+  <caption>
+    multiplication table of <var>N</var> prime numbers when <var>N</var> is <kbd><%= params[:number][:value] %></kbd>
+  </caption>
+  <thead>
+    <% if false %>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">2</th>
+      <th scope="col">3</th>
+      <th scope="col">5</th>
+    </tr>
+    <% end %>
+    <% row = @rows[0] %>
+    <tr>
+      <% row.each do |col| %>
+      <th scope="col"><%= col %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% if false %>
+    <tr>
+      <th scope="row">2</th>
+      <td>4</td>
+      <td>6</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>6</td>
+      <td>9</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>10</td>
+      <td>15</td>
+      <td>25</td>
+    </tr>
+    <% end %>
+    <% @rows[1..].each do |row| %>
+    <tr>
+      <th scope="row"><%= row[0] %></th>
+      <% row[1..].each do |col| %>
+      <td><%= col %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<hr />
+
+<h3>Example Output</h3>
+
+<h4>Preformatted Text</h4>
+
+<pre><samp>Example primes multiplication table when <var>N</var> is <kbd>3</kbd>
+|   |  2 |  3 |  5 |
+| 2 |  4 |  6 | 10 |
+| 3 |  6 |  9 | 15 |
+| 5 | 10 | 15 | 25 |
+</samp></pre>
+
+<hr />
+
+<footer>
+  <nav>
+    <h2>Scaffolds</h2>
+    <ol>
+      <li><%= link_to "Numbers", numbers_path %></li>
+    </ol>
+  </nav>
+</footer>
